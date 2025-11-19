@@ -9,9 +9,7 @@ import gulpSass from 'gulp-sass';
 import dartSass from 'sass';
 import { createGulpEsbuild } from 'gulp-esbuild';
 import { rimraf } from 'rimraf';
-import ts from 'typescript';
 // Add at top with other imports
-import dayjs from 'dayjs';
 // Add this import
 import fsExtra from 'fs-extra';
 
@@ -134,7 +132,6 @@ function createAliasRewriter() {
     });
 }
 
-// ... existing code ...
 export function scripts() {
     const entryFile = ENTRY_FILE;
 
@@ -175,7 +172,6 @@ export function scripts() {
         stream.on('end', resolve);
     });
 }
-// ... existing code ...
 
 // Gulp-managed assets (excluding packs)
 export function assets() {
@@ -233,4 +229,3 @@ export function watchAll() {
     gulp.watch(`${SRC_DIR}/packs/**/*`, copyPacksFs);
 }
 export const dev = gulp.series(clean, build, watchAll);
-// ... existing code ...
