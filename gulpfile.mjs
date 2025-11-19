@@ -64,7 +64,7 @@ export function clean(cb) {
 }
 
 // ---- Manifest (module.json) ----
-export function manifest() {
+export function manifestDev() {
     const version = `dev-${dayjs().format('YYYYMMDD-HHmmss')}`;
     return gulp
         .src(`${SRC_DIR}/module.json`, { base: SRC_DIR })
@@ -77,6 +77,13 @@ export function manifest() {
                 cb(null, file);
             }),
         )
+        .pipe(gulp.dest(DIST_DIR))
+        .pipe(finishLogger('manifest'));
+}
+
+export function manifestProd() {
+    return gulp
+        .src(`${SRC_DIR}/module.json`, { base: SRC_DIR })
         .pipe(gulp.dest(DIST_DIR))
         .pipe(finishLogger('manifest'));
 }
@@ -228,23 +235,22 @@ export async function copyPacksFs() {
 // Define missing watcher callbacks
 function scriptsChanged() {
     // Fire-and-forget; errors are already handled by plumber in scripts()
-    scripts().then(manifest);
+    scripts().then(manifestDev);
 }
 function assetsChanged(_p) {
-    // Copy changed assets (simple approach: recopy matching glob set)
-    // Run manifest after assets are copied
-    gulp.series(assets, manifest)(() => {});
+    // Copy changed assets then update manifest
+    gulp.series(assets, manifestDev)(() => {});
 }
 
 // Compose build
-export const build = gulp.parallel(styles, scripts, assets, manifest);
+export const build = gulp.parallel(styles, scripts, assets, manifestProd);
 
 // One-shot build (clean + build) for CI/production
 export const prod = gulp.series(clean, build);
 
-// Dev: clean, build once, then watch
+// Dev: clean, build once (using dev manifest), then watch
 export function watchAll() {
-    gulp.watch(GLOBS.styles, gulp.series(styles, manifest));
+    gulp.watch(GLOBS.styles, gulp.series(styles, manifestDev));
     gulp.watch(GLOBS.scripts)
         .on('change', () => scriptsChanged())
         .on('add', () => scriptsChanged());
@@ -252,8 +258,12 @@ export function watchAll() {
         .on('change', (p) => assetsChanged(p))
         .on('add', (p) => assetsChanged(p));
     // On any change inside packs, re-copy via fs-extra
-    gulp.watch(`${SRC_DIR}/packs/**/*`, gulp.series(copyPacksFs, manifest));
+    gulp.watch(`${SRC_DIR}/packs/**/*`, gulp.series(copyPacksFs, manifestDev));
     // Watch module.json specifically
-    gulp.watch(`${SRC_DIR}/module.json`, manifest);
+    gulp.watch(`${SRC_DIR}/module.json`, manifestDev);
 }
-export const dev = gulp.series(clean, build, watchAll);
+export const dev = gulp.series(
+    clean,
+    gulp.parallel(styles, scripts, assets, manifestDev),
+    watchAll
+);
