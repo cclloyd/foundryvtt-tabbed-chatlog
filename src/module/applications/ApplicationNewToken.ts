@@ -59,12 +59,36 @@ export class ApplicationNewToken extends HandlebarsApplicationMixin(ApplicationV
         ui.notifications!.info('Click on the canvas to place the token.');
 
         // Start having img follow mouse cursor here until placed
+        const texture = await loadTexture(formData.img);
+        const preview = new PIXI.Sprite(texture);
+        preview.anchor.set(0.5);
+        preview.alpha = 0.6;
+        preview.height = gridSize * canvas!.grid!.size;
+        preview.width = gridSize * canvas!.grid!.size;
 
+        preview.position.set(-10000, -10000);
+        // Use a top-level overlay layer so it renders above the scene
+        canvas!.interface!.addChild(preview);
+
+        const moveHandler = (e: any) => {
+            const { x, y } = e.data.getLocalPosition(canvas!.stage);
+            const snapped = canvas!.grid!.getSnappedPoint({ x, y }, { mode: CONST.GRID_SNAPPING_MODES.CENTER });
+            preview.position.set(snapped.x, snapped.y);
+        };
+
+        const cleanup = () => {
+            canvas!.stage!.off('mousemove', moveHandler);
+            if (preview.parent) preview.parent.removeChild(preview);
+            preview.destroy({ children: true });
+        };
+
+        canvas!.stage!.on('mousemove', moveHandler);
+        canvas!.stage!.once('rightdown', () => cleanup());
         canvas!.stage!.once('mousedown', async (event: any) => {
             const { x, y } = event.data.getLocalPosition(canvas!.stage);
             const snapped = canvas!.grid!.getSnappedPoint({ x, y }, { mode: CONST.GRID_SNAPPING_MODES.CENTER });
-            const sizePx = gridSize * canvas!.grid!.size;
-            // Basic Token Data
+            const sizePxLocal = gridSize * canvas!.grid!.size;
+
             const tokenData: any = {
                 name: formData.name,
                 texture: {
@@ -76,12 +100,11 @@ export class ApplicationNewToken extends HandlebarsApplicationMixin(ApplicationV
                 displayName: CONST.TOKEN_DISPLAY_MODES.HOVER,
                 width: gridSize,
                 height: gridSize,
-                x: snapped.x - sizePx / 2,
-                y: snapped.y - sizePx / 2,
+                x: snapped.x - sizePxLocal / 2,
+                y: snapped.y - sizePxLocal / 2,
                 actorLink: false,
             };
 
-            // Add Light Data if requested
             if (formData.lantern) {
                 tokenData.light = {
                     dim: 40,
@@ -92,11 +115,10 @@ export class ApplicationNewToken extends HandlebarsApplicationMixin(ApplicationV
                 };
             }
 
-            // Create the Token
             await canvas!.scene!.createEmbeddedDocuments('Token', [tokenData]);
             ui.notifications!.info(`Created token: ${formData.name}`);
-
             game.user!.setFlag(ns, 'dialog.newToken', formData);
+            cleanup();
         });
     }
 
