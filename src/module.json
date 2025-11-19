@@ -1,0 +1,32 @@
+{
+    "id": "cth-toolkit",
+    "title": "CTH Toolkit",
+    "description": "A collection of tweaks for FoundryVTT specific to our group, but open for all.",
+    "version": "CI_COMMIT_TAG",
+    "authors": [
+        {
+            "name": "cclloyd"
+        }
+    ],
+    "esmodules": ["module/cth-toolkit.js"],
+    "styles": ["styles/cth-toolkit.css"],
+    "packs": [],
+    "compatibility": {
+        "minimum": "13",
+        "verified": "13.350"
+    },
+    "relationships": {},
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "socket": true,
+    "url": "https://gitlab.com/cclloyd1/cth-toolkit",
+    "manifest": "https://github.com/cclloyd/foundryvtt-cth-toolkit/releases/latest/download/module.json",
+    "download": "https://github.com/cclloyd/foundryvtt-cth-toolkit/releases/download/CI_COMMIT_TAG/cth-toolkit.zip",
+    "license": "MIT",
+    "library": false
+}

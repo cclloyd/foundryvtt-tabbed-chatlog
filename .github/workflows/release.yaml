@@ -1,0 +1,72 @@
+name: Build and Release
+
+permissions:
+  contents: write
+
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Inject tag into module.json
+        run: |
+          sed -i "s/CI_COMMIT_TAG/${GITHUB_REF_NAME}/g" dist/module.json
+
+      - name: Prepare package
+        run: |
+          mv dist cth-toolkit
+          cp cth-toolkit/module.json ./
+          zip -q cth-toolkit.zip -r cth-toolkit/*
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cth-toolkit-artifacts
+          path: |
+            cth-toolkit.zip
+            module.json
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: cth-toolkit-artifacts
+
+      - name: Create GitHub Release and upload assets
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: Created using GitHub Actions
+          draft: false
+          prerelease: false
+          files: |
+            cth-toolkit.zip
+            module.json
