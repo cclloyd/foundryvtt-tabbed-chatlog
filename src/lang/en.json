@@ -1,5 +1,5 @@
 {
-    "tc.log.init": "Initializing tabbed-chatlog",
+    "tc.log.init": "Initializing fvtt-tabbed-chatlog",
     "tc.log.ready": "Running ready functions",
     "tc.settings.label.inlineRollThreshold": "Inline Roll Threshold",
     "tc.settings.hint.inlineRollThreshold": "Messages that pass this will be shown in rolls tab",

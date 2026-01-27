@@ -33,7 +33,7 @@ Manifest URL:
 - To develop:
     - Create a folder named `dist` in the project root.
     - Create a symlink/shortcut from the `dist` folder to your foundry's module directory and name the linked folder
-      `tabbed-chatlog`
+      `fvtt-tabbed-chatlog`
         - Windows default: `%LocalAppData%\FoundryVTT\Data\modules`
         - Linux default: `~/.local/share/FoundryVTT/Data/modules`
         - Recommended: develop in a docker container, mount the `dist` volume to the above destination

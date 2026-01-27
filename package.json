@@ -1,6 +1,6 @@
 {
     "private": true,
-    "name": "tabbed-chatlog",
+    "name": "fvtt-tabbed-chatlog",
     "version": "0.1.0",
     "description": "A collection of tweaks for FoundryVTT specific to our group, but open for all.",
     "license": "MIT",
@@ -22,7 +22,7 @@
         "build": "gulp build",
         "dev": "gulp dev",
         "clean": "rimraf dist",
-        "link-win": "New-Item -ItemType Junction -Path \"$env:LOCALAPPDATA\\FoundryVTT\\Data\\modules\\tabbed-chatlog\" -Target \".\\dist\""
+        "link-win": "New-Item -ItemType Junction -Path \"$env:LOCALAPPDATA\\FoundryVTT\\Data\\modules\\fvtt-tabbed-chatlog\" -Target \".\\dist\""
     },
     "devDependencies": {
         "@esbuild-plugins/tsconfig-paths": "^0.1.2",

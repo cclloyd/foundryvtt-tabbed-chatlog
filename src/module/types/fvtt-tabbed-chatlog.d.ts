@@ -1,7 +1,7 @@
-// src/module/types/tabbed-chatlog.d.ts
+// src/module/types/fvtt-fvtt-tabbed-chatlog.d.ts
 import type { TabbedChatlogManager } from '#tc/module/lib/manager/manager';
 
-export type ns = 'tabbed-chatlog';
+export type ns = 'fvtt-tabbed-chatlog';
 
 declare global {
     var game: Game & {

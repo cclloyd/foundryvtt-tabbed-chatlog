@@ -1,5 +1,5 @@
 {
-    "id": "tabbed-chatlog",
+    "id": "fvtt-tabbed-chatlog",
     "title": "Tabbed Chatlog",
     "description": "A module that adds tab capabilities to the chat log.",
     "version": "CI_COMMIT_TAG",
@@ -8,8 +8,8 @@
             "name": "cclloyd"
         }
     ],
-    "esmodules": ["module/tabbed-chatlog.js"],
-    "styles": ["styles/tabbed-chatlog.css"],
+    "esmodules": ["module/fvtt-tabbed-chatlog.js"],
+    "styles": ["styles/fvtt-tabbed-chatlog.css"],
     "packs": [],
     "compatibility": {
         "minimum": "13",
@@ -26,7 +26,7 @@
     "socket": true,
     "url": "https://github.com/cclloyd/foundryvtt-tabbed-chatlog",
     "manifest": "https://github.com/cclloyd/foundryvtt-tabbed-chatlog/releases/latest/download/module.json",
-    "download": "https://github.com/cclloyd/foundryvtt-tabbed-chatlog/releases/download/CI_COMMIT_TAG/tabbed-chatlog.zip",
+    "download": "https://github.com/cclloyd/foundryvtt-tabbed-chatlog/releases/download/CI_COMMIT_TAG/fvtt-tabbed-chatlog.zip",
     "license": "MIT",
     "library": false
 }

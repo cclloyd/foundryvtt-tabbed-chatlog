@@ -19,7 +19,7 @@ const sass = gulpSass(dartSass);
 const SRC_DIR = 'src';
 const DIST_DIR = 'dist';
 // Shared entry used for both full build and dev incremental rebuild
-const ENTRY_FILE = `${SRC_DIR}/module/tabbed-chatlog.ts`;
+const ENTRY_FILE = `${SRC_DIR}/module/fvtt-tabbed-chatlog.ts`;
 
 const GLOBS = {
     styles: `${SRC_DIR}/**/*.scss`,
@@ -187,7 +187,7 @@ export function scripts() {
                     format: 'esm',
                     sourcemap: true,
                     bundle: true, // single bundle
-                    outfile: 'module/tabbed-chatlog.js',
+                    outfile: 'module/fvtt-tabbed-chatlog.js',
                     loader: { '.ts': 'ts', '.tsx': 'tsx' },
                     logLevel: 'silent',
                     legalComments: 'none',

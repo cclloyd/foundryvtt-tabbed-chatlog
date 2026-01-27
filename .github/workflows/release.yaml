@@ -35,16 +35,16 @@ jobs:
 
       - name: Prepare package
         run: |
-          mv dist tabbed-chatlog
-          cp tabbed-chatlog/module.json ./
-          zip -q tabbed-chatlog.zip -r tabbed-chatlog/*
+          mv dist fvtt-tabbed-chatlog
+          cp fvtt-tabbed-chatlog/module.json ./
+          zip -q fvtt-tabbed-chatlog.zip -r fvtt-tabbed-chatlog/*
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: tabbed-chatlog-artifacts
+          name: fvtt-tabbed-chatlog-artifacts
           path: |
-            tabbed-chatlog.zip
+            fvtt-tabbed-chatlog.zip
             module.json
 
   release:
@@ -55,7 +55,7 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: tabbed-chatlog-artifacts
+          name: fvtt-tabbed-chatlog-artifacts
 
       - name: Create GitHub Release and upload assets
         uses: softprops/action-gh-release@v2
@@ -68,5 +68,5 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            tabbed-chatlog.zip
+            fvtt-tabbed-chatlog.zip
             module.json
