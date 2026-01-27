@@ -1,0 +1,54 @@
+<style>
+    #tabbed-chat-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        pointer-events: all;
+        padding: 0 0.25rem 0.25rem 1rem;
+    }
+    #tabbed-chat-wrapper span {
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.5);
+        display: block;
+        flex: 1 1 0;
+        text-align: center;
+        cursor: pointer;
+        padding: 0.25rem 0;
+        margin: 0 0.25rem;
+        transition: all 0.3s ease;
+    }
+    #tabbed-chat-wrapper span.active {
+        box-shadow: rgba(255, 0, 0, 0.3) 0px 0px 6px;
+        background-color: rgba(0, 0, 0, 0.75);
+        text-shadow: rgb(255, 0, 0) 0px 0px 6px;
+    }
+    #tabbed-chat-wrapper span:hover {
+        box-shadow: rgba(255, 0, 0, 0.5) 0px 0px 6px;
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+    #tabbed-chat-wrapper span:active {
+        box-shadow: rgb(255, 0, 0) 0px 0px 6px;
+        background-color: rgba(0, 0, 0, 0.95);
+    }
+
+    #chat {
+        gap: 0;
+    }
+    #chat ol.chat-log li {
+        display: none;
+    }
+    #chat ol.chat-log[data-chattab=chat] li[data-type=chat] {
+        display: flex;
+    }
+    #chat ol.chat-log[data-chattab=rolls] li[data-type=roll] {
+        display: flex;
+    }
+    #chat ol.chat-log[data-chattab=ooc] li[data-type=ooc] {
+        display: flex;
+    }
+    /*# sourceMappingURL=tabbed-chatlog.css.map */
+
+
+</style>

@@ -1,0 +1,25 @@
+<div id="tabbed-chat-wrapper" class="tabbed-chat-wrapper">
+    <span data-chattab="chat" class="active">Chat</span>
+    <span data-chattab="rolls">Rolls</span>
+    <span data-chattab="ooc">OOC</span>
+</div>
+<script>
+    const w = document.getElementById("tabbed-chat-wrapper");
+    const log = document.querySelector("#chat ol.chat-log");
+
+    w?.addEventListener("click", (e) => {
+        const tab = e.target instanceof Element ? e.target.closest("span[data-chattab]") : null;
+        if (!tab || !w.contains(tab)) return;
+
+        w.querySelector(".active")?.classList.remove("active");
+        tab.classList.add("active");
+
+        const chattab = tab.getAttribute("data-chattab");
+        if (chattab) log?.setAttribute("data-chattab", chattab);
+
+        if (game.tc.scrollToBottom) {
+            const scroll = document.querySelector("#chat .chat-scroll");
+            scroll.scrollTop = log.scrollHeight;
+        }
+    });
+</script>

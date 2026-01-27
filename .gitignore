@@ -1,0 +1,35 @@
+# IDE
+.idea/
+.vs/
+junk/
+
+# Node Modules
+node_modules/
+npm-debug.log
+
+# yarn2
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+!src/**/*.log
+*.log
+
+# Local configuration
+foundryconfig.json
+
+# Distribution files
+dist
+src/module/*.js
+
+# ESLint
+.eslintcache
+
+# Junit results
+junit.xml
+*.env
+env
+!src/**/*.log
