@@ -1,11 +1,19 @@
-# Casual Try-Hards Toolkit for FoundryVTT
 
-This is a module for FoundryVTT that does various tweaks and macros useful for running our game. Open sourced so that
-others may use it. Most functions of this module are able to be enabled/disabled in the settings.
+<div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+
+# Tabbed Chatlog for FoundryVTT (v13+)
+
+![tabs.png](docs/screenshots/tabs.png)
+
+This is a module for FoundryVTT that separates the chatlog into multiple tabs: Chat, Rolls, and OOC.
+</div>
+
 
 # Features:
 
-- All apps and API exposed through `game.tc`.
+- 3 tabs: Chat, Rolls, and OOC
+- Option to scroll to bottom when switching tabs (default: true)
+- Option to send messages with many inline rolls into the rolls tab
 
 # Installation
 
@@ -13,8 +21,8 @@ Install through the FoundryVTT admin interface.
 
 Manifest URL:
 
-- **Latest:** https://gitlab.com/api/v4/projects/29080072/packages/generic/permalink/latest/module.json
-- **Specific Version:** https://gitlab.com/api/v4/projects/29080072/packages/generic/permalink/v1.x.x/module.json
+- **Latest:** https://github.com/cclloyd/foundryvtt-tabbed-chatlog/releases/download/latest/module.json
+- **Specific Version:** https://github.com/cclloyd/foundryvtt-tabbed-chatlog/releases/download/v1.0.1/module.json
 
 # Development
 
