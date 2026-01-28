@@ -1,5 +1,4 @@
 export const renderChatMessageHTML = (message: ChatMessage<"base" | any>, html: HTMLElement, context: any) => {
-    console.debug('renderChatMessageHTML', message);
     if (!message.speaker.actor && !message.speaker.token) {
         $(html).attr('data-type', 'ooc');
     }
